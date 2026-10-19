@@ -16,5 +16,4 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run PetSyncService tests
-        working-directory: pawinder_server
         run: mvn -B test -Dtest=PetSyncServiceTest

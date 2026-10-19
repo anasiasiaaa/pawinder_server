@@ -49,7 +49,7 @@ public class PetSyncService {
 
         for (CatDogApiItem item : response.getBody()) {
             if (petRepository.existsByApiPetIdAndType_Id(item.getId(), type.getId())) {
-
+                continue;
             }
             Pet pet = new Pet();
             pet.setApiPetId(item.getId());

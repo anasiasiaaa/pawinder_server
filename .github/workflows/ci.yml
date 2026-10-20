@@ -3,9 +3,7 @@ name: Spring Boot CI
 on:
   push:
     branches:
-      - master
-      - kazakova
-      - ponomaryova
+    - '**'
 
   pull_request:
     branches:
@@ -28,5 +26,15 @@ jobs:
           java-version: '17'
           cache: maven
 
-      - name: Build
-        run: bash ./mvnw clean package -DskipTests
+      # Сборка и все тесты: в том числе проверка конфигурации (ApiKeysConfigTest).
+      # Красный тест останавливает конвейер.
+      - name: Build and test
+        run: bash ./mvnw -B clean verify
+
+      - name: Check version in jar
+        run: |
+          JAR=$(ls target/*-SNAPSHOT.jar | head -n 1)
+          EXPECTED=$(git rev-parse --short=7 HEAD)
+          ACTUAL=$(unzip -p "$JAR" BOOT-INF/classes/git.properties | grep '^git.commit.id.abbrev=' | cut -d= -f2)
+          echo "jar=$JAR expected=$EXPECTED actual=$ACTUAL"
+          test "$EXPECTED" = "$ACTUAL"

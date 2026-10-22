@@ -11,6 +11,6 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @ConfigurationProperties(prefix = "catapi")
 public record CatApiProperties(
-        //@NotBlank(message = "ключ TheCatAPI не задан: укажите переменную окружения CAT_API_KEY")
+        @NotBlank(message = "ключ TheCatAPI не задан: укажите переменную окружения CAT_API_KEY")
         String key) {
 }

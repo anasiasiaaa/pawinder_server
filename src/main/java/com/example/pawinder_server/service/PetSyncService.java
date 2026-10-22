@@ -4,6 +4,8 @@ import com.example.pawinder_server.entity_classes.Pet;
 import com.example.pawinder_server.entity_classes.PetType;
 import com.example.pawinder_server.repository_interfaces.PetRepository;
 import com.example.pawinder_server.repository_interfaces.PetTypeRepository;
+import com.example.pawinder_server.service.cardlogic.PetCardLogicContract;
+import com.example.pawinder_server.service.cardlogic.PetCardLogicProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ public class PetSyncService {
     private String dogApiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
+
+    private PetCardLogicContract cardLogic = PetCardLogicProvider.get();
 
     @Autowired
     private PetRepository petRepository;
@@ -55,12 +59,8 @@ public class PetSyncService {
             pet.setApiPetId(item.getId());
             pet.setType(type);
             pet.setPhotoUrl(item.getUrl());
-            if (item.getBreeds() != null && !item.getBreeds().isEmpty()) {
-                pet.setName(item.getBreeds().get(0).getName());
-                pet.setDescription(item.getBreeds().get(0).getTemperament());
-            } else {
-                pet.setName(typeName.equals("Кошка") ? "Кот без породы" : "Пёс без породы");
-            }
+            pet.setName(cardLogic.resolveName(item.getBreeds(), typeName));
+            pet.setDescription(cardLogic.resolveDescription(item.getBreeds()));
             petRepository.save(pet);
         }
     }

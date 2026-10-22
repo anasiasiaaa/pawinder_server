@@ -53,7 +53,7 @@ docker run --name pawinder-mysql -e MYSQL_ROOT_PASSWORD=<пароль> -e MYSQL_
 docker run --name pawinder-mysql -e MYSQL_ROOT_PASSWORD=<пароль> -e MYSQL_DATABASE=pawinder -p 3306:3306 -v "${PWD}/db:/docker-entrypoint-initdb.d" -d mysql:8
 ```
 
-Подождите около 30 секунд и убедитесь, что таблицы созданы:
+Дождитесь готовности MySQL: docker logs pawinder-mysql должен содержать строку ready for connections с port: 3306 (первая такая строка без порта относится к временному серверу инициализации). После этого убедитесь, что таблицы созданы:
 
 ```bash
 docker exec pawinder-mysql mysql -uroot -p<пароль> pawinder -e "SHOW TABLES; SELECT * FROM type;"

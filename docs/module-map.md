@@ -1,15 +1,15 @@
 # Модульная карта серверной части Pawinder
 
-Запись добавлена: студент (автор записи) — серверная часть, ПЗ №2 МДК.01.04. Клиентская часть описана в репозитории Android-приложения.
+Запись добавлена: Пономарёва А.С. — серверная часть, ПЗ №2 МДК.01.04. Клиентская часть описана в репозитории Android-приложения.
 
 Стрелка `A → B` означает: исходный код A зависит от контракта или типов B.
 
 | Модуль | Ответственность | Контракт | Зависимости | Место в репозитории | Статус | Автор записи |
 |---|---|---|---|---|---|---|
-| PetCardLogic | Выбор названия и описания карточки по данным ответа TheCatAPI/TheDogAPI | `PetCardLogicContract`: `resolveName`, `resolveDescription` | `BreedInfo` | `src/main/java/.../service/cardlogic/` | работает | автор отчёта |
-| PetSyncService | Загрузка карточек из внешних API, проверка дубликатов, сохранение | `syncCats(count)`, `syncDogs(count)` | `PetCardLogicContract`, `PetCardLogicProvider`, `PetRepository`, `PetTypeRepository`, `CatDogApiItem` | `src/main/java/.../service/` | работает | автор отчёта |
-| PetController | REST-интерфейс `/api/pets` | HTTP | `PetSyncService`, `PetRepository` | `src/main/java/.../controllers/` | работает | автор отчёта |
-| Репозитории и entity | Доступ к таблицам `pet`, `type`, `user` и др. | Spring Data JPA | БД MySQL | `repository_interfaces/`, `entity_classes/` | работает | автор отчёта |
+| PetCardLogic | Выбор названия и описания карточки по данным ответа TheCatAPI/TheDogAPI | `PetCardLogicContract`: `resolveName`, `resolveDescription` | `BreedInfo` | `src/main/java/.../service/cardlogic/` | работает | Пономарёва А. С. |
+| PetSyncService | Загрузка карточек из внешних API, проверка дубликатов, сохранение | `syncCats(count)`, `syncDogs(count)` | `PetCardLogicContract`, `PetCardLogicProvider`, `PetRepository`, `PetTypeRepository`, `CatDogApiItem` | `src/main/java/.../service/` | работает | Пономарёва А. С. |
+| PetController | REST-интерфейс `/api/pets` | HTTP | `PetSyncService`, `PetRepository` | `src/main/java/.../controllers/` | работает | Пономарёва А. С. |
+| Репозитории и entity | Доступ к таблицам `pet`, `type`, `user` и др. | Spring Data JPA | БД MySQL | `repository_interfaces/`, `entity_classes/` | работает | Пономарёва А. С. |
 
 ```mermaid
 graph LR

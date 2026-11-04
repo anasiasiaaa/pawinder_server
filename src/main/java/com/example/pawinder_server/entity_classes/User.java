@@ -19,6 +19,14 @@ public class User {
 
     private String salt;
 
+    private String name;
+
+    private String surname;
+
+    // в таблице user колонка называется city и хранит id города
+    @Column(name = "city")
+    private Integer cityId;
+
 
     public void setId(Integer id) {
         this.id = id;
@@ -59,4 +67,13 @@ public class User {
     public String getSalt() {
         return salt;
     }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+
+    public String getSurname() { return surname; }
+    public void setSurname(String surname) { this.surname = surname; }
+
+    public Integer getCityId() { return cityId; }
+    public void setCityId(Integer cityId) { this.cityId = cityId; }
 }
